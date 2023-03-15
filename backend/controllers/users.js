@@ -1,14 +1,14 @@
 const { hashPassword, comparePassword } = require('../helpers/bcryptjs')
 const { encodeToken } = require('../helpers/jwt')
-const { User } = require('../scheme/User')
-const { ObjectId } = require('mongodb')
+const User = require('../schema/User')
 
 class Users {
     static async register(req, res, next) {
         try {
-            const { username, email, password } = req.body
-            if (!username){
-                throw {name: 'Bad Request', message: 'Username is empty'}
+            const { email, password } = req.body
+            const duplicate = await User.findOne({email})
+            if (duplicate?.email){
+                throw {name: 'Already Taken', message: 'Email Already Taken'}
             }
             if (!email){
                 throw {name: 'Bad Request', message: 'Email is empty'}
@@ -17,10 +17,9 @@ class Users {
                 throw {name: 'Bad Request', message: 'Password is empty'}
             }
             const hashedPassword = hashPassword(password)
-            const user = {
-                username, email, hashedPassword
-            }
-            const data = await User.create(user)
+            const data = await User.create({
+             email, password: hashedPassword
+            })
             return res.json(data)
         } catch (error) {
             next(error)
@@ -36,17 +35,16 @@ class Users {
             if (!password){
                 throw {name: 'Bad Request', message: 'Password is empty'}
             }
-            const data = await User.findByEmail(email)
+            const data = await User.findOne({email})
             if (!data?.email){
                 throw {name: 'Invalid email or password', message: 'Invalid email or password'}
             }
-            const isValid = comparePassword(password, data.hashedPassword)
+            const isValid = comparePassword(password, data.password)
             if (!isValid){
                 throw {name: 'Invalid email or password', message: 'Invalid email or password'}
             }
-            console.log(ObjectId(data._id), "<<<<<<<<<<")
-            const encodedUsers = encodeToken(ObjectId(data._id).toString())
-            return res.json({email: data.email, username: data.username, encodedUsers})
+            const access_token = encodeToken({id: data._id.toString()})
+            return res.json({access_token})
         } catch (error) {
             next(error)
         }

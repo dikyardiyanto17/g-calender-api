@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const uri = "mongodb+srv://dikyardiyanto:102117014@challenge2phase3.cl2pgfn.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://dikyardiyanto:102117014@challenge2phase3.cl2pgfn.mongodb.net/challenge2phase3?retryWrites=true&w=majority";
 
 async function connect() {
   try {
@@ -11,13 +11,5 @@ async function connect() {
   }
 }
 
-connect();
 
-const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', function() {
-  console.log('MongoDB connected');
-});
-
-module.exports = {db, connect};
+module.exports = connect
