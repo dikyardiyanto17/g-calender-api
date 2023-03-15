@@ -1,0 +1,197 @@
+.headline {
+  font-family: "Roboto";
+  font-style: normal;
+  font-size: 43.18px;
+  text-align: left !important;
+  color: #eb2730;
+  margin-bottom: 20px !important;
+}
+
+.left-bg {
+  width: 100%;
+}
+
+.form-group{
+  width: 500px;
+  margin-top: 20px !important;
+}
+
+.form-control {
+  height: 40px;
+}
+
+.headline2 {
+  /* Frame 251 */
+
+  /* Auto layout */
+  padding: 0px !important;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-size: 10px;
+  line-height: 26px;
+
+  color: #b1b1b1;
+}
+
+.beam {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 150px;
+}
+
+.spantext {
+  /* Enjoy the Convenience of Beam Space Storage */
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-size: 40px;
+  position: absolute;
+  top: 150px;
+  left: 50px;
+
+  color: #ffffff;
+}
+
+.customForm {
+  /* Rectangle 64 */
+
+  position: absolute;
+  width: 547px;
+  height: 62.98px;
+  left: 1167px;
+  top: 525px;
+
+  background: #ffffff;
+  box-shadow: inset 0px 0.899671px 4.49835px rgba(0, 0, 0, 0.1);
+  border-radius: 8.99671px;
+}
+
+.formtext {
+  /* Email Address* */
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  /* identical to box height */
+
+  color: #3f3b31;
+}
+
+.customButton {
+  background-color: #EB2730;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  font-family: Roboto;
+  font-size: 10px;
+  color: #FFFFFF;
+  margin-top: 20px !important;
+  height: 35px;
+  width: 240px;
+}
+
+.customButton2 {
+  background-color: #3a589b;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  font-family: Roboto;
+  font-size: 10px;
+  color: #FFFFFF;
+  margin-top: 20px !important;
+  height: 35px;
+  width: 240px;
+}
+
+.forgot-password {
+  /* Forgot Password? */
+
+
+font-family: 'Roboto';
+margin-top: 10px !important;
+font-size: 15px;
+/* identical to box height */
+
+color: #00ACEE;
+
+
+}
+
+.forgot-password2 {
+  /* Forgot Password? */
+
+
+font-family: 'Roboto';
+font-size: 15px;
+/* identical to box height */
+
+color: #00ACEE;
+
+
+}
+
+.paddingTheDiv {
+  padding: 150px;
+  background-color: black;
+}
+
+@media screen and (max-width: 970px) {
+  .left-bg{
+    width: 100%;
+  }
+  .form-group{
+    width: 250px;
+    margin: 0px !important;
+  }
+  .headline {
+    font-size: 30px;
+  }
+  .spantext {
+    font-size: 20px;
+  }
+
+  br {
+    margin: 0px !important;
+  }
+
+  .beam {
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+
+  .spantext{
+    top: 85px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .headline {
+    font-size: 20px;
+  }
+  .paddingTheDiv {
+    padding: 30px;
+  }
+  .spantext{
+    top: 90px;
+  }
+
+  .whited {
+    background-color: #FFFFFF;
+  }
+  .container1 {
+    height: 70vh;
+    z-index: -1;
+  }
+}
