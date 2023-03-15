@@ -1,0 +1,66 @@
+.headline {
+  font-family: "Roboto";
+  font-style: normal;
+  font-size: 20px;
+  text-align: center;
+  color: #eb2730;
+}
+.headline2 {
+  /* Frame 251 */
+
+  /* Auto layout */
+  padding: 0px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-size: 10px;
+  line-height: 26px;
+
+  color: #b1b1b1;
+}
+
+.customForm {
+  /* Rectangle 64 */
+
+  position: absolute;
+  width: 547px;
+  height: 62.98px;
+  left: 1167px;
+  top: 525px;
+
+  background: #ffffff;
+  box-shadow: inset 0px 0.899671px 4.49835px rgba(0, 0, 0, 0.1);
+  border-radius: 8.99671px;
+}
+
+.formtext {
+  /* Email Address* */
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  /* identical to box height */
+
+  color: #3f3b31;
+}
+
+.customButton {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.paddingTheDiv {
+    padding: 100px;
+}
+
+@media screen and (max-width: 576px) {
+    .paddingTheDiv {
+      padding: 30px;
+    }
+  }
