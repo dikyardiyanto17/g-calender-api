@@ -6,17 +6,27 @@ import Home from '../views/Home';
 const router = createBrowserRouter([
     {
         path: "/",
-        // loader: () => {
-        //     if (!localStorage.access_token) throw redirect('/login')
-        //     return null
-        // },
+        loader: () => {
+            if (!localStorage.access_token) throw redirect('/landingpage')
+            return null
+        },
         children: [
             {
                 path: "",
                 element: (
                     <Home />
                 ),
-            }, {
+            }
+        ]
+    },
+    {
+        path: "/",
+        loader: () => {
+            if (localStorage.access_token) throw redirect('/')
+            return null
+        },
+        children: [
+            {
                 path: "landingpage",
                 element: (
                     <LandingPage />
