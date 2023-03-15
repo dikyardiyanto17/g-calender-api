@@ -4,7 +4,7 @@ const { connect } = require('./config/mongodb')
 const router = require('./routes')
 const errorHandler = require('./middlewares/errorHandlers')
 const app = express()
-const port = process.env.PORT || 4001
+const port = process.env.PORT || 3000
 
 
 app.use(cors())

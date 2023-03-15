@@ -1,23 +1,23 @@
-const { MongoClient } = require("mongodb");
+const mongoose = require('mongoose');
 
-const uri = process.env.MONGOURI || "mongodb+srv://dikyardiyanto:102117014@challenge2phase3.cl2pgfn.mongodb.net/?retryWrites=true&w=majority";
-
-const client = new MongoClient(uri);
-
-let db
+const uri = "mongodb+srv://dikyardiyanto:102117014@challenge2phase3.cl2pgfn.mongodb.net/?retryWrites=true&w=majority";
 
 async function connect() {
-    try {
-        await client.connect()
-        console.log('mongoDB connencted')
-        db = client.db('challenge2phase3')
-    } catch (error) {
-        await client.close();
-    }
+  try {
+    await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    console.log('MongoDB connected');
+  } catch (error) {
+    console.error('MongoDB connection error', error);
+  }
 }
 
-function getDB() {
-    return db
-}
+connect();
 
-module.exports = { connect, getDB }
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', function() {
+  console.log('MongoDB connected');
+});
+
+module.exports = {db, connect};
