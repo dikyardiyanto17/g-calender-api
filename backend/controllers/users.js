@@ -27,7 +27,7 @@ class Users {
                 throw {name: 'Bad Request', message: 'Password is empty'}
             }
             const hashedPassword = hashPassword(password)
-            const data = await User.create({
+            await User.create({
              email, password: hashedPassword
             })
             return res.status(201).json({message: 'Success Registering'})
@@ -48,7 +48,8 @@ class Users {
                 const data = await User.create({
                  email, password: hashedPassword
                 })
-                return res.status(201).json({message: "Success Registering"})
+                const access_token = encodeToken({id: data._id.toString()})
+                return res.status(201).json({access_token})
             }
         } catch (error) {
             next(error)

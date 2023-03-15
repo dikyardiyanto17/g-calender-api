@@ -14,37 +14,37 @@ oauth2Client.setCredentials({
 });
 
 class Events {
-  static mailer(sendto, link) {
-    let transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "dicapricornus17@gmail.com",
-        pass: "ylmdmaszkjrtfdoa",
-      },
-    });
+  // static mailer(sendto, link) {
+  //   let transporter = nodemailer.createTransport({
+  //     service: "gmail",
+  //     auth: {
+  //       user: "dicapricornus17@gmail.com",
+  //       pass: "ylmdmaszkjrtfdoa",
+  //     },
+  //   });
 
-    let mailOptions = {
-      from: "dicapricornus@gmail.com",
-      to: sendto,
-      subject: `Invite You`,
-      html: link,
-    };
+  //   let mailOptions = {
+  //     from: "dicapricornus@gmail.com",
+  //     to: sendto,
+  //     subject: `Invite You`,
+  //     html: link,
+  //   };
 
-    transporter.sendMail(mailOptions, (err, info) => {
-      if (err) {
-        console.log(err, "<<<<<<<");
-      } else {
-        console.log(info, "Berhasil kirim email <<<<<<<");
-      }
-    });
-  }
+  //   transporter.sendMail(mailOptions, (err, info) => {
+  //     if (err) {
+  //       console.log(err, "<<<<<<<");
+  //     } else {
+  //       console.log(info, "Berhasil kirim email <<<<<<<");
+  //     }
+  //   });
+  // }
 
   static async newEvent(req, res, next) {
     try {
       const user = await User.findOne({ _id: req.user.id });
       const { NamaKegiatan, JamMulai, JamSelesai, invite1, invite2, invite3 } =
         req.body;
-      let participant = [{email: user.email}];
+      let participant = [{ email: user.email }];
       if (!NamaKegiatan) {
         throw { name: "Bad Request", message: "Event Name is empty" };
       }
@@ -55,22 +55,22 @@ class Events {
         throw { name: "Bad Request", message: "Event Ending at is empty" };
       }
       if (invite1) {
-        participant.push({email: invite1});
+        participant.push({ email: invite1 });
       }
       if (invite2) {
-        participant.push({email: invite2});
+        participant.push({ email: invite2 });
       }
       if (invite3) {
-        participant.push({email: invite3});
+        participant.push({ email: invite3 });
       }
-      const data = await Event.create({
+      await Event.create({
         NamaKegiatan,
         Tanggal: JamMulai,
         JamMulai,
         JamSelesai,
       });
       const calender = google.calendar("v3");
-      const response = await calender.events.insert({
+      await calender.events.insert({
         auth: oauth2Client,
         calendarId: "primary",
         sendNotifications: true,
@@ -83,13 +83,13 @@ class Events {
           attendees: participant,
           anyoneCanAddSelf: true,
           attendeesOmitted: true,
-          organizer: {email: user.email}
+          organizer: { email: user.email },
         },
       });
-    //   participant.forEach(x => {
-    //         Events.mailer(x.email, response.data.htmlLink)
-    //   });
-      return res.status(201).json({message: "Success creating event"});
+      //   participant.forEach(x => {
+      //         Events.mailer(x.email, response.data.htmlLink)
+      //   });
+      return res.status(201).json({ message: "Success creating event" });
     } catch (error) {
       next(error);
     }

@@ -25,3 +25,5 @@ mongoose.connection.once('open', () => {
         console.log("App on port " + port)
     })
 })
+
+// module.exports = app

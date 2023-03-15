@@ -10,6 +10,6 @@ const userSchema = new Schema({
         type: String,
         required: true
     }
-})
+}, { bufferTimeoutMS: 100000 })
 
 module.exports = mongoose.model('User', userSchema)
