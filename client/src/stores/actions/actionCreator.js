@@ -37,7 +37,7 @@ export const login = (formLogin) => {
                     return resp.json()
                 } else {
                     return resp.json().then((error) => {
-                        throw new Error(error.message);
+                        throw new Error(error);
                     })
                 }
             })

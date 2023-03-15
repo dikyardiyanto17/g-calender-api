@@ -1,15 +1,32 @@
 import "../css/login.css";
-import googlebutton from "../asset/Google.png";
 import fb from "../asset/Fb.png";
-import login from "../asset/Login.png";
+import loginGambar from "../asset/Login.png";
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
-import { googleLogin } from "../stores/actions/actionCreator";
+import { googleLogin, login } from "../stores/actions/actionCreator";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 export default function LandingPage() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [formLogin, setFormLogin] = useState({
+      email: '',
+      password: ''
+    })
+    const changeHandler = (e) => {
+      const { value, name } = e.target
+      const obj = { ...formLogin }
+      obj[name] = value
+      setFormLogin(obj)
+  }
+  const submitHandler = (e) => {
+      e.preventDefault()
+      dispatch(login(formLogin))
+          .then(() => {
+              navigate('/')
+          })
+  }
   return (
     <>
       <div className="container-fluid">
@@ -24,7 +41,6 @@ export default function LandingPage() {
           <div className="col-xxl-12 col-sm-6 d-flex justify-content-center align-items-center flex-column paddingTheDiv">
             <div className="d-flex justify-content-center align-items-center flex-column">
               <h1 className="headline">Log in to Beam Space</h1>
-              <img src={googlebutton} alt="G-cal" style={{ width: "50%" }} />
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   let decoded = jwt_decode(credentialResponse.credential);
@@ -40,7 +56,7 @@ export default function LandingPage() {
               <div className="headline2">
                 <p>Or Login With Your Email</p>
               </div>
-              <form>
+              <form onSubmit={submitHandler}>
                 <div className="form-group">
                   <label htmlFor="exampleInputEmail1">Email address</label>
                   <input
@@ -49,6 +65,8 @@ export default function LandingPage() {
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     placeholder="Enter email"
+                    onChange={changeHandler}
+                    name='email'
                   />
                 </div>
                 <div className="form-group">
@@ -58,10 +76,12 @@ export default function LandingPage() {
                     className="form-control"
                     id="exampleInputPassword1"
                     placeholder="Password"
+                    onChange={changeHandler}
+                    name='password'
                   />
                 </div>
                 <button type="submit" className="customButton">
-                  <img src={login} alt="G-cal" style={{ width: "50%" }} />
+                  <img src={loginGambar} alt="G-cal" style={{ width: "50%" }} />
                 </button>
               </form>
             </div>

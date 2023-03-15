@@ -89,7 +89,7 @@ class Events {
     //   participant.forEach(x => {
     //         Events.mailer(x.email, response.data.htmlLink)
     //   });
-      return res.status(201).json(response);
+      return res.status(201).json({message: "Success creating event"});
     } catch (error) {
       next(error);
     }

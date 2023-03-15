@@ -30,7 +30,7 @@ class Users {
             const data = await User.create({
              email, password: hashedPassword
             })
-            return res.status(201).json(data)
+            return res.status(201).json({message: 'Success Registering'})
         } catch (error) {
             next(error)
         }
@@ -48,7 +48,7 @@ class Users {
                 const data = await User.create({
                  email, password: hashedPassword
                 })
-                return res.status(201).json(data)
+                return res.status(201).json({message: "Success Registering"})
             }
         } catch (error) {
             next(error)

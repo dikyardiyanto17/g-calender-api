@@ -3,10 +3,16 @@ import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { getEvents } from "../stores/actions/actionCreator";
 import TableEvents from "../components/Table";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const events = useSelector((state) => state.events.events);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const logout = () => {
+    localStorage.clear()
+    navigate('/landingpage')
+}
   useEffect(() => {
     dispatch(getEvents());
   }, []);
@@ -34,6 +40,7 @@ export default function Home() {
             </tbody>
           )}
         </Table>
+        <button type="button" class="btn btn-danger" onClick={logout}>Logout</button>
       </div>
     </>
   );
